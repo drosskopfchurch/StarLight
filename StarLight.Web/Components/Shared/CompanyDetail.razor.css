@@ -1,0 +1,39 @@
+.company-lastPrice {
+    font-size: 1.5em;
+}
+.good{
+    color: green;
+    font-weight: 600;
+}
+.good.highlight{
+    animation: highlightBgG 500ms linear;
+}
+.bad{
+    color:#ff0000;
+    font-weight: 600;
+}
+.bad.highlight{
+    animation: highlightBgR 500ms linear;
+}
+
+@keyframes highlightBgR {
+    0% {
+        background: #fff
+    }
+    50% {
+        background: rgba(255, 0, 0, 0.5)
+    }
+    to {
+        background: #fff
+    }
+}
+@keyframes highlightBgG {
+    0% {
+        background: #fff
+    }
+    50% {
+        background: rgba(0, 255, 0, 0.5)  }
+    to {
+        background: #fff
+    }
+}

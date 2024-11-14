@@ -49,11 +49,11 @@ public static class InitialChartData
             };
             return chartData;
     }
-    public static LineChartDataset StockDataSet(string symbol, string color)
+    public static LineChartDataset StockDataSet(string symbol, string color, double initValue = 0)
     {
         var lineChartDataset = new LineChartDataset();
         lineChartDataset.Label = symbol;
-        lineChartDataset.Data = new List<double?> { 0 };
+        lineChartDataset.Data = new List<double?> { initValue };
         lineChartDataset.BackgroundColor = color;
         lineChartDataset.BorderColor = color;
         lineChartDataset.Fill = false;

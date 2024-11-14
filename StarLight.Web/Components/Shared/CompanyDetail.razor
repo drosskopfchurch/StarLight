@@ -1,0 +1,42 @@
+@inject IJSRuntime JS
+@rendermode InteractiveServer
+
+<div>
+    <script>
+        window.updatePrice = () => {
+            document.getElementById('company-lastPrice').classList.add('highlight');
+            setTimeout(() => document.getElementById('company-lastPrice').classList.remove('highlight'), 200)
+        }
+    </script>
+    <div class="header">
+        <div class="company-name">@Name<span>(@Symbol)</span></div>
+        <div id="company-lastPrice" class="company-lastPrice @(Good?"good":"bad")">@LastPrice (@Diff%)</div>
+        <div class="company-lastUpdate">@LastUpdated</div>
+    </div>
+    <div class="body">@ChildContent</div>
+</div>
+
+
+@code{
+    [Parameter]
+    public string Symbol { get; set; } = default!;
+
+    [Parameter]
+    public string Name { get; set; } = default!;
+
+    [Parameter]
+    public double LastPrice { get; set; } = default!;
+    
+    [Parameter]
+    public double Diff { get; set; } = default!;
+    
+    [Parameter]
+    public DateTimeOffset LastUpdated { get; set; } = default!;
+    
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    
+    [Parameter]
+    public bool Good { get; set; } = false; 
+
+}
