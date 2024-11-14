@@ -1,0 +1,4 @@
+.chart-grid {
+    display: flex;
+    direction: row;
+}

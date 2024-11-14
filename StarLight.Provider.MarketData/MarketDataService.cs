@@ -8,9 +8,11 @@ public interface IMarketDataService
     Task AddHistoricPrice(HistoricalPrice historicalPrice, CancellationToken cancellationToken = default);
     Task<HistoricalPrice?> GetLastPrice(string symbol, CancellationToken cancellationToken = default);
     Task<IEnumerable<HistoricalPrice>?> GetHistoricalPrices(string symbol, DateTime from, DateTime to, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Company>> GetCompanies();
 }
 public class MarketDataService(HttpClient client, HybridCache hybridCache, StarLightWebService starLightWebService) : IMarketDataService
 {
+    public async Task<IEnumerable<Company>> GetCompanies() => await client.GetFromJsonAsync<IEnumerable<Company>>("/companies") ?? [];
     public async Task AddHistoricPrice(HistoricalPrice historicalPrice, CancellationToken cancellationToken = default) =>
         await Task.WhenAll(
             client.PostAsJsonAsync("/historical-prices", historicalPrice, cancellationToken),

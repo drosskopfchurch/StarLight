@@ -34,6 +34,11 @@ public class Worker(ILogger<Worker> logger, MarketDataService marketDataService,
                 var newHistoricalPrice = new HistoricalPrice(symbol, DateTimeOffset.Now, newPrice);
                 await marketDataService.AddHistoricPrice(newHistoricalPrice, stoppingToken);
             }
+            else
+            {
+                var newHistoricalPrice = new HistoricalPrice(symbol, DateTimeOffset.Now, random.Next(100, 300));
+                await marketDataService.AddHistoricPrice(newHistoricalPrice, stoppingToken);
+            }
 
 
             var delay = random.Next(1, 5) * 1000;

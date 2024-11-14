@@ -1,0 +1,46 @@
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<div class="price-chart">
+    <LineChart @ref="lineChart" />
+</div>
+
+@code
+{
+    [Parameter]
+    public Company company { get; set; } = default!;
+
+    [Parameter]
+    public string color { get; set; } = default!;
+    private HubConnection? hubConnection;
+    private LineChart lineChart = default!;
+    private ChartData chartData = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        chartData = InitialChartData.GetChartData(company.Symbol, color);
+        hubConnection = new HubConnectionBuilder()
+        .WithUrl(Navigation.ToAbsoluteUri("/market-hub"))
+        .Build();
+
+        hubConnection.On<HistoricalPrice>("HistoricalPriceAdded", async (price) =>
+        {
+            if (price.Symbol == company.Symbol)
+            {
+                await lineChart.AddDataAsync(chartData, price.DateTime.ToString("mm:ss"), new LineChartDatasetData(price.Symbol,
+    price.Price));
+            }
+        });
+
+        await hubConnection.StartAsync();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await lineChart.InitializeAsync(chartData, InitialChartData.LineChartOptions);
+        }
+        await base.OnAfterRenderAsync(firstRender);
+    }
+}

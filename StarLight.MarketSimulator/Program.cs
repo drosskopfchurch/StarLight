@@ -15,6 +15,8 @@ builder.Services.AddHttpClient<StarLightWebService>((client =>
     client.BaseAddress =  new("https://localhost:51002");
 }));
 
+builder.Services.AddHostedService<AAL>();
+builder.Services.AddHostedService<AAPL>();
 builder.Services.AddHostedService<APPL>();
 builder.Services.AddHostedService<AMZN>();
 builder.Services.AddHostedService<MSFT>();
@@ -25,6 +27,7 @@ builder.Services.AddHostedService<JNJ>();
 builder.Services.AddHostedService<NFLX>();
 builder.Services.AddHostedService<ADBE>();
 builder.Services.AddHostedService<PEP>();
+builder.Services.AddHostedService<CAT>();
 
 var host = builder.Build();
 host.Run();

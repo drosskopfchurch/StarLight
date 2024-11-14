@@ -37,6 +37,18 @@ public static class InitialChartData
             return chartData;
         }
     }
+    public static ChartData GetChartData(string symbol, string color)
+    {
+        
+            var chartData = new ChartData();
+
+            chartData.Labels = new List<string> { "00:00" };
+            chartData.Datasets = new List<IChartDataset>()
+            {
+                StockDataSet(symbol, color),
+            };
+            return chartData;
+    }
     public static LineChartDataset StockDataSet(string symbol, string color)
     {
         var lineChartDataset = new LineChartDataset();
