@@ -12,23 +12,18 @@
 
 Welcome to your new app.
 
-
-<div>
-    <span>connected:@(hubConnection.ConnectionId)</span>
-    <span>prices: @(JsonSerializer.Serialize(prices))</span>
-    <ul>
-        @foreach (var price in prices)
-        {
-            <li>@price.DateTime - @price.Price</li>
-        }
-    </ul>
-    <div>Clicked:@clicked</div>
+<div class="container-fluid overflow-x-auto">
+    <LineChart @ref="lineChart" Width="800" />
 </div>
 
 
 @code{
     private IList<HistoricalPrice> prices = [];
+    private IList<HistoricalPrice> NFLXPrices = [];
     private HubConnection? hubConnection;
+    private PriceService priceService = new PriceService();
+    private LineChart lineChart = default!;
+    private ChartData chartData = InitialChartData.StockChartData;
     private bool clicked = false;
     protected override async Task OnInitializedAsync()
     {
@@ -43,11 +38,27 @@ Welcome to your new app.
 
         hubConnection.On<HistoricalPrice>("HistoricalPriceAdded", async (price) =>
         {
-            prices.Add(price);
+            switch(price.Symbol)
+            {
+                case "NFLX":
+                case "DIS":
+                    priceService.AddPrice(price);
+                    await lineChart.AddDataAsync(chartData, price.DateTime.ToString("mm:ss"), new LineChartDatasetData(price.Symbol, price.Price));
+                    break;
+                default:
+                    break;
+            }
             await InvokeAsync(StateHasChanged);
-            StateHasChanged();
         });
 
         await hubConnection.StartAsync();
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await lineChart.InitializeAsync(chartData, InitialChartData.LineChartOptions);
+        }
+        await base.OnAfterRenderAsync(firstRender);
     }
 }

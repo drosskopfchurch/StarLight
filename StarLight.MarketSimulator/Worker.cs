@@ -25,7 +25,7 @@ public class Worker(ILogger<Worker> logger, MarketDataService marketDataService,
             if (lastPrice is not null)
             {
                 var price = lastPrice.Price;
-                var change = random.Next(975, 1025) * 0.001;
+                var change = random.Next(800, 1200) * 0.001;
                 var newPrice = price + (price * change);
                 if (newPrice <= 0)
                 {
@@ -36,7 +36,7 @@ public class Worker(ILogger<Worker> logger, MarketDataService marketDataService,
             }
 
 
-            var delay = random.Next(1, 10) * 200;
+            var delay = random.Next(1, 5) * 1000;
 
             await Task.Delay(delay, stoppingToken);
         }

@@ -13,6 +13,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddSignalR();
+builder.Services.AddBlazorBootstrap();
 builder.Services.AddSingleton<IMarketHub, MarketHub>();
 builder.Services.AddHttpClient<MarketDataService>((client =>
 {
