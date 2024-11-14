@@ -19,6 +19,7 @@ public class MarketDataContext(DbContextOptions<MarketDataContext> options) : Db
         {
             entity.HasKey(e => new { e.Symbol, e.DateTime });
             entity.Property(e => e.Symbol).IsRequired();
+            entity.HasData(Prices.SeedData);
         });
     }
 }

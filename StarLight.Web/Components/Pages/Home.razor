@@ -1,7 +1,53 @@
 ﻿@page "/"
+@using Microsoft.AspNetCore.SignalR.Client
+@using System.Text.Json
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+
+<div>
+    <span>connected:@(hubConnection.ConnectionId)</span>
+    <span>prices: @(JsonSerializer.Serialize(prices))</span>
+    <ul>
+        @foreach (var price in prices)
+        {
+            <li>@price.DateTime - @price.Price</li>
+        }
+    </ul>
+    <div>Clicked:@clicked</div>
+</div>
+
+
+@code{
+    private IList<HistoricalPrice> prices = [];
+    private HubConnection? hubConnection;
+    private bool clicked = false;
+    protected override async Task OnInitializedAsync()
+    {
+        await ConnectToMarketHub();
+    }
+    
+    private async Task ConnectToMarketHub()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/market-hub"))
+            .Build();
+
+        hubConnection.On<HistoricalPrice>("HistoricalPriceAdded", async (price) =>
+        {
+            prices.Add(price);
+            await InvokeAsync(StateHasChanged);
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+    }
+}

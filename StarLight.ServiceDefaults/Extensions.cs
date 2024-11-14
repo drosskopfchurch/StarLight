@@ -19,6 +19,8 @@ public static class Extensions
         builder.ConfigureOpenTelemetry();
 
         builder.AddDefaultHealthChecks();
+        builder.AddRedisClient(connectionName: "cache");
+        
 
         builder.Services.AddServiceDiscovery();
 

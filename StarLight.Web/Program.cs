@@ -1,10 +1,32 @@
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.SignalR;
+using StarLight.Provider.MarketData;
 using StarLight.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.AddServiceDefaults();
+#pragma warning disable EXTEXP0018 // Suppress the warning for AddHybridCache
+builder.Services.AddHybridCache();
+#pragma warning restore EXTEXP0018 // Restore the warning for AddHybridCache
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<IMarketHub, MarketHub>();
+builder.Services.AddHttpClient<MarketDataService>((client =>
+{
+    client.BaseAddress =  new("https://localhost:51000");
+}));
+builder.Services.AddHttpClient<StarLightWebService>((client =>
+{
+    client.BaseAddress =  new("https://localhost:51002");
+}));
+builder.Services.AddResponseCompression(opts =>
+{
+   opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+       ["application/octet-stream"]);
+});
 
 var app = builder.Build();
 
@@ -20,6 +42,16 @@ app.UseHttpsRedirection();
 
 
 app.UseAntiforgery();
+app.MapHub<MarketHub>("/market-hub");
+
+app.MapPost("api/historical-prices", async (IHubContext<MarketHub> hub, IMarketHub marketHub,  HistoricalPrice historicalPrice) => 
+{  
+    // await marketHub.AddHistoricalPrice(historicalPrice);
+    await hub.Clients.All.SendAsync("AddHistoricalPrice", historicalPrice);
+    await hub.Clients.All.SendAsync("HistoricalPriceAdded", historicalPrice);
+})
+.WithName("AddHistoricalPrice");
+
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()

@@ -8,7 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="9.0.0-preview.9.24556.5" />
     <ProjectReference Include="../StarLight.Provider.MarketData/StarLight.Provider.MarketData.csproj"></ProjectReference>
+    <ProjectReference Include="..\StarLight.ServiceDefaults\StarLight.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

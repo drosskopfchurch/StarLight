@@ -1,4 +1,4 @@
-public static class StringExtensions
+    public static class StringExtensions
 {
     public static string ToQueryString(this object parameters)
     {

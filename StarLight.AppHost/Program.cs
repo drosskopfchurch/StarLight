@@ -13,13 +13,22 @@ var migrationService = builder.AddProject<Projects.StarLight_MigrationService>("
     .WaitFor(marketData);
 
 var apiMarket = builder.AddProject<Projects.StarLight_Api_MarketData>("api-market")
-                .WithReference(sqlserver)
-                .WithReference(cache)
-                .WaitForCompletion(migrationService);
+    .WithHttpsEndpoint(port: 51000, name: "api-market")
+    .WithReference(marketData)
+    .WithReference(cache)
+    .WaitForCompletion(migrationService);
 
 builder.AddProject<Projects.StarLight_Web>("web")
+    .WithHttpsEndpoint(port: 51002, name: "api-market")
     .WithExternalHttpEndpoints()
     .WithReference(cache)
-    .WithReference(apiMarket);
+    .WithReference(apiMarket)
+    .WaitForCompletion(migrationService);
+
+builder.AddProject<Projects.StarLight_MarketSimulator>("simulator")
+    .WithExternalHttpEndpoints()
+    .WithReference(cache)
+    .WithReference(apiMarket)
+    .WaitForCompletion(migrationService);
 
 builder.Build().Run();

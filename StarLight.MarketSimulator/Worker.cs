@@ -21,12 +21,16 @@ public class Worker(ILogger<Worker> logger, MarketDataService marketDataService,
             }
 
             var lastPrice = await marketDataService.GetLastPrice(symbol, stoppingToken);
-            
+
             if (lastPrice is not null)
             {
                 var price = lastPrice.Price;
                 var change = random.Next(975, 1025) * 0.001;
                 var newPrice = price + (price * change);
+                if (newPrice <= 0)
+                {
+                    newPrice = price + 10;
+                }
                 var newHistoricalPrice = new HistoricalPrice(symbol, DateTimeOffset.Now, newPrice);
                 await marketDataService.AddHistoricPrice(newHistoricalPrice, stoppingToken);
             }

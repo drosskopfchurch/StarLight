@@ -8,5 +8,6 @@
   
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="9.0.0-preview.9.24556.5" />
+    <ProjectReference Include="..\StarLight.ServiceDefaults\StarLight.ServiceDefaults.csproj" />
   </ItemGroup>
 </Project>
