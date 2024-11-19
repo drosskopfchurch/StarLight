@@ -18,7 +18,7 @@ const jokes = [
     "Why did the React developer get a new job? Because they wanted to hook up with a new company!"
 ];
 
-const LoadingPage = () => {
+const LoadingPage = ({children}) => {
     const [currentJoke, setCurrentJoke] = useState(jokes[0]);
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const LoadingPage = () => {
         <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 10 }}>
             <Box>
                 <Typography variant="h4" component="h1" gutterBottom>
-                    Loading... Please Wait!
+                    {children}
                 </Typography>
                 <CircularProgress size={60} thickness={5} />
                 <Typography variant="h6" component="p" gutterBottom sx={{ mt: 2 }}>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, Stack, TextField, Typography } from '@mui/material';
 
 const mergeData = (data) => {
     const merged = {};
@@ -28,8 +28,7 @@ const DemoGraph = ({ graphData }) => {
         }
     }, [graphData]);
     return (
-        <>
-            
+        <Stack spacing={4}>
             <Autocomplete
                 multiple
                 value={selectedSymbols}
@@ -41,27 +40,32 @@ const DemoGraph = ({ graphData }) => {
             />
             {
                 selectedSymbols && selectedSymbols.length > 0 ?
-                    <ResponsiveContainer width="100%" height={400}>
-                        <LineChart
-                            width={500}
-                            height={300}
-                            data={chartData}
-                            margin={{
-                                top: 5, right: 30, left: 20, bottom: 5,
-                            }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="date" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            {selectedSymbols.map((symbol, i) => (
-                                <Line key={i} type="monotone" dataKey={symbol} stroke={colors[i]} activeDot={{ r: 8 }} />
-                            ))}
-                        </LineChart>
-                    </ResponsiveContainer> : <h1>Select Symbol</h1>
+                    <>
+                        <Typography component="h3" gutterBottom>
+                            Graph
+                        </Typography>
+                        <ResponsiveContainer width="100%" height={400}>
+                            <LineChart
+                                width={500}
+                                height={300}
+                                data={chartData}
+                                margin={{
+                                    top: 5, right: 30, left: 20, bottom: 5,
+                                }}
+                            >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="date" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                {selectedSymbols.map((symbol, i) => (
+                                    <Line key={i} type="monotone" dataKey={symbol} stroke={colors[i]} activeDot={{ r: 8 }} />
+                                ))}
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </> : <></>
             }
-        </>
+        </Stack>
     );
 }
 
