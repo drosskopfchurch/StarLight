@@ -17,11 +17,11 @@ builder.Services.AddBlazorBootstrap();
 builder.Services.AddSingleton<IMarketHub, MarketHub>();
 builder.Services.AddHttpClient<MarketDataService>((client =>
 {
-    client.BaseAddress =  new("https://localhost:51000");
+    client.BaseAddress =  new("https://api-market");
 }));
 builder.Services.AddHttpClient<StarLightWebService>((client =>
 {
-    client.BaseAddress =  new("https://localhost:51002");
+    client.BaseAddress =  new("https://web");
 }));
 builder.Services.AddResponseCompression(opts =>
 {
