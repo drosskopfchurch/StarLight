@@ -5,7 +5,6 @@ import { Autocomplete, TextField } from '@mui/material';
 
 const mergeData = (data) => {
     const merged = {};
-    debugger
     data.forEach(item => {
         const date = new Date(item.date).toLocaleDateString();
         if (!merged[date]) {
@@ -23,7 +22,6 @@ const DemoGraph = ({ graphData }) => {
     const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#d7305f', '#e0e0e0', '#f0f0f0', '#f8f8f8', '#f0f0f0', '#e0e0e0', '#d0d0d0', '#c0c0c0', '#b0b0b0', '#a0a0a0', '#909090', '#808080', '#707070', '#606060', '#505050', '#404040', '#303030', '#202020', '#101010'];
     useEffect(() => {
         if (graphData) {
-            debugger
             const formattedData = mergeData(graphData);
             setChartData(formattedData);
             setUniqueSymbols(Array.from(new Set(graphData.map(item => item.securityId))));
@@ -31,6 +29,7 @@ const DemoGraph = ({ graphData }) => {
     }, [graphData]);
     return (
         <>
+            
             <Autocomplete
                 multiple
                 value={selectedSymbols}
@@ -57,7 +56,7 @@ const DemoGraph = ({ graphData }) => {
                             <Tooltip />
                             <Legend />
                             {selectedSymbols.map((symbol, i) => (
-                                <Line key={symbol} type="monotone" dataKey={symbol} stroke={colors[i]} activeDot={{ r: 8 }} />
+                                <Line key={i} type="monotone" dataKey={symbol} stroke={colors[i]} activeDot={{ r: 8 }} />
                             ))}
                         </LineChart>
                     </ResponsiveContainer> : <h1>Select Symbol</h1>

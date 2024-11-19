@@ -14,11 +14,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from '@mui/material';
 
 const pages = [{"title":'Regular', "href":"regular"}, {"title":'Slow', "href":"slow"}];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,10 +24,6 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -83,7 +77,7 @@ function ResponsiveAppBar() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: 'center' }}>
                     <Link href={page.href}>{page.title}</Link>
                     </Typography>
@@ -114,7 +108,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               
               <Button
-                key={page}
+                key={page.title}
                 href={page.href}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >

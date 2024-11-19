@@ -39,15 +39,9 @@ const LoadingPage = () => {
                     We're fetching the best content for you!
                 </Typography>
                 <Grid2 container spacing={2} justifyContent="center" alignItems="center" sx={{ mt: 4 }}>
-                    <Grid2 item>
-                        <EmojiEmotionsIcon color="primary" style={{ fontSize: 50 }} />
-                    </Grid2>
-                    <Grid2 item>
-                        <SentimentVerySatisfiedIcon color="secondary" style={{ fontSize: 50 }} />
-                    </Grid2>
-                    <Grid2 item>
-                        <MoodIcon color="success" style={{ fontSize: 50 }} />
-                    </Grid2>
+                    <EmojiEmotionsIcon color="primary" style={{ fontSize: 50 }} />
+                    <SentimentVerySatisfiedIcon color="secondary" style={{ fontSize: 50 }} />
+                    <MoodIcon color="success" style={{ fontSize: 50 }} />
                 </Grid2>
                 <Typography variant="h2" component="p" sx={{ mt: 4 }}>
                     {currentJoke}

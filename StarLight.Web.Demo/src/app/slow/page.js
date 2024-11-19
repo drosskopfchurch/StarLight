@@ -10,7 +10,6 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const mergeData = (data) => {
   const merged = {};
-  debugger
   data.forEach(item => {
     const date = new Date(item.date).toLocaleDateString();
     if (!merged[date]) {

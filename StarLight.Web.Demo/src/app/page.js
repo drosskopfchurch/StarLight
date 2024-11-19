@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, Box, List, ListItem, ListItemText, AppBar, Toolbar, ListItemIcon, Card, CardContent, Grid, Grid2, Link, Button } from '@mui/material';
+import { Typography, List, ListItem, ListItemText, ListItemIcon, Card, CardContent, Grid2, Link } from '@mui/material';
 import { CallSplit, RocketLaunch, SmartButton } from '@mui/icons-material';
 
 export default function Home() {
@@ -62,10 +62,10 @@ export default function Home() {
             </Link>
           </Grid2>
           <List>
-            <ListItem button component={Link} href="/about">
+            <ListItem component={Link} href="/about">
               <ListItemText primary="About" />
             </ListItem>
-            <ListItem button component={Link} href="/contact">
+            <ListItem component={Link} href="/contact">
               <ListItemText primary="Contact" />
             </ListItem>
           </List>

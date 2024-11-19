@@ -1,7 +1,6 @@
 export const dynamic = 'force-static'
 
 export async function GET(req) {
-    debugger
     const { url } = req;
     const marketapi = process.env.services__apimarket__https__0 ||
         process.env.services__apimarket__http__0
