@@ -17,7 +17,7 @@ builder.Services.AddBlazorBootstrap();
 builder.Services.AddSingleton<IMarketHub, MarketHub>();
 builder.Services.AddHttpClient<MarketDataService>((client =>
 {
-    client.BaseAddress =  new("https://api-market");
+    client.BaseAddress =  new("https://apimarket");
 }));
 builder.Services.AddHttpClient<StarLightWebService>((client =>
 {

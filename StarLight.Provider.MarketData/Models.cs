@@ -16,3 +16,13 @@ public record HistoricalPrice(
     public string LastKey => GetLastKey(Symbol);
     public string ListKey => GetListKey(Symbol);
 };
+
+public class PriceRecord
+{
+    public DateTime Date { get; set; }
+    public string? SecurityId { get; set; }
+    public int CompanyId { get; set; }
+    public string? Ticker { get; set; }
+    public string? IsoCountryCode { get; set; }
+    public decimal Close { get; set; }
+}

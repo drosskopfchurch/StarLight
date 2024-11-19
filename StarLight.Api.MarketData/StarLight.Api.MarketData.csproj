@@ -13,4 +13,14 @@
     <ProjectReference Include="..\StarLight.ServiceDefaults\StarLight.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="33.0.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="data_sample.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -8,7 +8,7 @@ builder.Services.AddHybridCache();
 #pragma warning restore EXTEXP0018 // Restore the warning for AddHybridCache
 builder.Services.AddHttpClient<MarketDataService>((client =>
 {
-    client.BaseAddress =  new("https://api-market");
+    client.BaseAddress =  new("https://apimarket");
 }));
 builder.Services.AddHttpClient<StarLightWebService>((client =>
 {

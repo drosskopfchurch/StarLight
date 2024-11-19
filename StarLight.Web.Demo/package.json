@@ -9,12 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.7",
+    "@mui/material": "^6.1.7",
+    "@next/env": "^15.0.3",
     "next": "15.0.3",
+    "node-fetch": "^3.3.2",
     "plotly.js": "^2.35.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-plotly.js": "^2.6.0",
-    "recharts": "^2.13.3"
+    "recharts": "^2.13.3",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "eslint": "^8",
