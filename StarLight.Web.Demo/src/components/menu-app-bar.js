@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from '@mui/material';
 
-const pages = [{"title":'Regular', "href":"regular"}, {"title":'Slow', "href":"slow"}];
+const pages = [{"title":'Regular', "href":"regular"}, {"title":'Slow', "href":"slow"}, {"title":'Error', "href":"error"}];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);

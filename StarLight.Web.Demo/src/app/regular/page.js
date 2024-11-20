@@ -8,12 +8,12 @@ import useSWR from 'swr'
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
-const LineChartComponent = () => {
+const RegularPage = () => {
   const { data, error, isLoading } = useSWR('/api/prices', fetcher)
 
 
   if (isLoading) return <LoadingPage>Loading Regular Example</LoadingPage>
-  if (error) return <div>Error: {error}</div>
+  if (error) return <ErrorMessage error={error}></ErrorMessage>
 
   return (
     <>
@@ -24,4 +24,4 @@ const LineChartComponent = () => {
   );
 };
 
-export default LineChartComponent;
+export default RegularPage;

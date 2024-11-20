@@ -20,7 +20,7 @@ const cache = createCache({
 
 export default function MyApp({ children }) {
     return (
-        <div class="main-background">
+        <div className="main-background">
             <CacheProvider value={cache}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />

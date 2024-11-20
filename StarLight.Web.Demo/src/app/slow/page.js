@@ -7,11 +7,11 @@ import LoadingPage from '@/components/dumb/loading';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const LineChartComponent = () => {
+const SlowPage = () => {
   const { data, error, isLoading } = useSWR('/api/pricesslow', fetcher)
 
-  if (isLoading) return <LoadingPage>Loading Slow Example</LoadingPage>
-  if (error) return <div>Error: {error}</div>
+  if (isLoading || !data) return <LoadingPage>Loading Slow Example</LoadingPage>
+  if (error) return <ErrorMessage error={error}></ErrorMessage>
 
   return (
     <>
@@ -22,4 +22,4 @@ const LineChartComponent = () => {
   );
 };
 
-export default LineChartComponent;
+export default SlowPage;
