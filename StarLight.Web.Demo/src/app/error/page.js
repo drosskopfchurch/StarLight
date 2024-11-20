@@ -24,7 +24,7 @@ const fetcher = async url => {
 const ErrorPage = () => {
   const { data, error, isLoading } = useSWR('/api/pricesslows', fetcher)
 
-  if (isLoading) return <LoadingPage>Loading Slow Example</LoadingPage>
+  if (isLoading) return <LoadingPage></LoadingPage>
   if (error) return <ErrorMessage error={error}></ErrorMessage>
 
   return (

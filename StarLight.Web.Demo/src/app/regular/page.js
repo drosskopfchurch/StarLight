@@ -12,7 +12,7 @@ const RegularPage = () => {
   const { data, error, isLoading } = useSWR('/api/prices', fetcher)
 
 
-  if (isLoading) return <LoadingPage>Loading Regular Example</LoadingPage>
+  if (isLoading) return <LoadingPage></LoadingPage>
   if (error) return <ErrorMessage error={error}></ErrorMessage>
 
   return (

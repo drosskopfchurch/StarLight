@@ -10,7 +10,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 const SlowPage = () => {
   const { data, error, isLoading } = useSWR('/api/pricesslow', fetcher)
 
-  if (isLoading || !data) return <LoadingPage>Loading Slow Example</LoadingPage>
+  if (isLoading) return <LoadingPage></LoadingPage>
   if (error) return <ErrorMessage error={error}></ErrorMessage>
 
   return (

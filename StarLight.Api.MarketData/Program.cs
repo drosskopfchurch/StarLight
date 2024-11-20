@@ -73,8 +73,13 @@ using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.Invarian
 app.MapGet("/prices", () => records);
 app.MapGet("/pricesslow", async () =>
 {
-    await Task.Delay(5000); // Simulate slow connection with a 5-second delay
+    await Task.Delay(6000); // Simulate slow connection with a 5-second delay
     return records;
+});
+app.MapGet("/pricesslows", async () =>
+{
+    await Task.Delay(2000); // Simulate slow connection with a 5-second delay
+    throw new NotImplementedException("Something went wrong");
 });
 
 app.Run();

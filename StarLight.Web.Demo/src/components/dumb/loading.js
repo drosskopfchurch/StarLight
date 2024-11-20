@@ -18,22 +18,19 @@ const jokes = [
     "Why did the React developer get a new job? Because they wanted to hook up with a new company!"
 ];
 
-const LoadingPage = ({children}) => {
+const LoadingPage = () => {
     const [currentJoke, setCurrentJoke] = useState(jokes[0]);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentJoke(jokes[Math.floor(Math.random() * jokes.length)]);
-        }, 3000); // Change joke every 1.5 seconds
+        }, 3000);
 
         return () => clearInterval(interval); // Cleanup interval on component unmount
     }, []);
     return (
         <Container maxWidth="sm" sx={{ textAlign: 'center', mt: 10 }}>
             <Box>
-                <Typography variant="h4" component="h1" gutterBottom>
-                    {children}
-                </Typography>
                 <CircularProgress size={60} thickness={5} />
                 <Typography variant="h6" component="p" gutterBottom sx={{ mt: 2 }}>
                     We're fetching the best content for you!
