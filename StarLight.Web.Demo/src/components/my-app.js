@@ -20,15 +20,17 @@ const cache = createCache({
 
 export default function MyApp({ children }) {
     return (
-        <CacheProvider value={cache}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Container maxWidth="md">
-                    <Box my={4}>
-                        {children}
-                    </Box>
-                </Container>
-            </ThemeProvider>
-        </CacheProvider>
+        <div class="main-background">
+            <CacheProvider value={cache}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Container maxWidth="md">
+                        <Box my={4}>
+                            {children}
+                        </Box>
+                    </Container>
+                </ThemeProvider>
+            </CacheProvider>
+        </div>
     );
 }
